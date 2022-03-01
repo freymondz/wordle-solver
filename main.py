@@ -14,28 +14,28 @@ Welcome to my wordle-solver!
         print('''
 (Q)uit (G)uess (R)emove
         ''')
-        userInput = input()
+        user_input = input()
 
-        if userInput == 'Q' or userInput == 'q':
+        if user_input == 'Q' or user_input == 'q':
             break
-        elif userInput == "G":
+        elif user_input == "G":
             guess(words)
-        elif userInput == "R":
+        elif user_input == "R":
             remove(words)
 
 
 def guess(words):
     print("Guess: ", end='')
-    userGuess = list(input())
+    user_guess = list(input())
     potential_words = list()
 
-    if len(userGuess) != 5:
+    if len(user_guess) != 5:
         print("Guess needs to be a 5 letter word")
         return
 
     for word in words:
         current_word = list(word)
-        if is_valid(userGuess, current_word):
+        if is_valid(user_guess, current_word):
             potential_words.append(word)
 
     print_words(potential_words)
@@ -43,23 +43,23 @@ def guess(words):
 
 def remove(words: list):
     print("Remove: ", end='')
-    userRemove = list(input())
+    user_remove = list(input())
     remove_words = words.copy()
 
     for word in remove_words:
         current_word = list(word)
-        if is_valid(userRemove, current_word):
+        if is_valid(user_remove, current_word):
             words.remove(word)
 
 
-def is_valid(userInput: list, current_word: list):
+def is_valid(user_input: list, current_word: list):
     is_valid_current_word = current_word.copy()
 
     for i in range(5):
-        if userInput[i] != is_valid_current_word[i]:
+        if user_input[i] != is_valid_current_word[i]:
             is_valid_current_word[i] = '-'
 
-    return userInput == is_valid_current_word
+    return user_input == is_valid_current_word
 
 
 def print_words(potential_words):
