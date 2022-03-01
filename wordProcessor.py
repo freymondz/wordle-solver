@@ -1,7 +1,7 @@
 import json
 
 def load_words():
-    with open('words_dictionary.json') as json_file:
+    with open('data/words_dictionary.json') as json_file:
         data = json.load(json_file)
     words = data.keys()
     words_json = {}

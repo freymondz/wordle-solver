@@ -1,7 +1,7 @@
 import json
 
 def guess_words():
-  with open('wordFile.json') as json_file:
+  with open('data/wordFile.json') as json_file:
     data = json.load(json_file)
   words = data.keys()
 
