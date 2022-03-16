@@ -1,11 +1,10 @@
-import json
+from json import load
 
 
 def guess_words():
     with open('data/wordFile.json') as json_file:
-        data: dict = json.load(json_file)
+        data: dict = load(json_file)
     words = list(data.keys())
-    # TODO: In the future I should specify if you also want to remove letters
     print('''
 Welcome to my wordle-solver!
     ''')
@@ -21,35 +20,37 @@ Welcome to my wordle-solver!
         elif user_input == "G":
             guess(words)
         elif user_input == "R":
-            remove(words)
+            words = remove(words)
 
 
-def guess(words):
+def guess(words: list):
+    print()
     print("Guess: ", end='')
     user_guess = list(input())
     potential_words = list()
 
     if len(user_guess) != 5:
-        print("Guess needs to be a 5 letter word")
+        print("Your guess needs to be a 5 letter word")
         return
 
     for word in words:
-        current_word = list(word)
-        if is_valid(user_guess, current_word):
+        if is_valid(user_guess, list(word)):
             potential_words.append(word)
 
     print_words(potential_words)
 
 
 def remove(words: list):
+    print()
     print("Remove: ", end='')
     user_remove = list(input())
     remove_words = words.copy()
 
     for word in remove_words:
-        current_word = list(word)
-        if is_valid(user_remove, current_word):
-            words.remove(word)
+        if is_valid(user_remove, list(word)):
+            remove_words.remove(word)
+
+    return remove_words
 
 
 def is_valid(user_input: list, current_word: list):
